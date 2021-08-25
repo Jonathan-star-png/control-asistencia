@@ -1,0 +1,23 @@
+<ion-grid>
+  <form [formGroup]="courseForm" (ngSubmit)="send(courseForm.value)">
+    <ion-item>
+      <ion-label position="floating">Curso:</ion-label>
+      <ion-input ngDefaultControl formControlName="name_course"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Código del Curso:</ion-label>
+      <ion-input ngDefaultControl formControlName="code_course"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sección:</ion-label>
+      <ion-select placeholder="Selecciona Uno" ok-text="Seleccionar" cancel-text="Cancelar" (ionChange)="changeSelect($event)">
+        <ion-select-option *ngFor="let section of sections" value="{{section.section}}">{{section.section}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-button type="submit" color="success">Enviar</ion-button>
+    <ion-button (click)="clearForm()" color="danger">Cancelar</ion-button>
+  </form>
+</ion-grid>
