@@ -1,0 +1,8 @@
+<ion-grid>
+  <ion-button expand="full" color="medium">Cursos Registrado</ion-button>
+  <ion-item *ngFor="let item of courses">
+    <ion-col size="5"><input type="text" value="{{item.name_course}}" readonly></ion-col>
+    <ion-col size="5"><input type="text" value="{{item.code_course}}" class="padding" readonly></ion-col>
+    <ion-col size="2"><input type="text" value="{{item.section}}" readonly></ion-col>
+  </ion-item>
+</ion-grid>

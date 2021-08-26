@@ -1,48 +1,21 @@
 <ion-grid>
   <form [formGroup]="attendanceForm" (ngSubmit)="send(attendanceForm.value)">
-    <!-- <ion-row>
-      <ion-col size="12">Carnet:</ion-col>
-      <ion-col size="12">
-        <input type="text" formControlName="license" (keyup)="compareCard()">
-      </ion-col>
-    </ion-row> -->
-
     <ion-item>
       <ion-label position="floating">Carnet:</ion-label>
       <ion-input ngDefaultControl formControlName="license"></ion-input>
     </ion-item>
 
     <ng-container *ngIf="compareCard()">
-      <!-- <ion-row>
-        <ion-col size="12">Nombre: {{name}}</ion-col>
-      </ion-row> -->
       <ion-item>
-        <!-- <ion-label>Nombre: {{name}}</ion-label> -->
         <ion-label position="floating" class="weight">Nombre:</ion-label>
       <ion-input value="{{name}}" disabled="true" class="weight"></ion-input>
       </ion-item>
-
     </ng-container>
     
-    <!-- <ion-row>
-      <ion-col size="12">Código del Curso:</ion-col>
-      <ion-col size="12">
-        <input type="text" formControlName="course_code">
-      </ion-col>
-    </ion-row> -->
-
     <ion-item>
       <ion-label position="floating">Código del Curso:</ion-label>
       <ion-input ngDefaultControl formControlName="course_code"></ion-input>
     </ion-item>
-
-
-    <!-- <ion-item>
-      <ion-col size="12">Fecha:</ion-col>
-      <ion-col size="12">
-        <input type="date" formControlName="date" style="border: 0px;outline: none;">
-      </ion-col>
-    </ion-item> -->
     
     <ion-item>
       <ion-label position="floating">Fecha:</ion-label>
@@ -53,31 +26,17 @@
        monthShortNames="jan, feb, mar, apr, mai, jun, jul, aug, sep, okt, nov, des"></ion-datetime>
     </ion-item>
 
-    <!-- <ion-row>
-      <ion-col size="12">Temas Vistos:</ion-col>
-      <ion-col size="12">
-        <input type="text" formControlName="watched_topics">
-      </ion-col>
-    </ion-row> -->
-
     <ion-item>
       <ion-label position="floating">Temas Vistos:</ion-label>
       <ion-input ngDefaultControl formControlName="watched_topics"></ion-input>
     </ion-item>
-
-    <!-- <ion-row>
-      <ion-col size="12">Justificación:</ion-col>
-      <ion-col size="12">
-        <input type="text" formControlName="justification">
-      </ion-col>
-    </ion-row> -->
 
     <ion-item>
       <ion-label position="floating">Justificación:</ion-label>
       <ion-input ngDefaultControl formControlName="justification"></ion-input>
     </ion-item>
 
-    <ion-button type="submit" color="success">Enviar</ion-button>
-    <ion-button (click)="clearForm()" color="danger">Cancelar</ion-button>
+    <ion-button type="submit" color="success" expand="block">Enviar</ion-button>
+    <ion-button (click)="clearForm()" color="danger" expand="block">Cancelar</ion-button>
   </form>
 </ion-grid>

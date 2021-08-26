@@ -13,7 +13,9 @@ export class FormAttendanceComponent implements OnInit {
   data=[
     {
       "card": "1990-18-16610",
-      "name": "Jonathan Eduardo Sequén Patzán"
+      "name": "Jonathan Eduardo Sequén Patzán",
+      "section":"A",
+      "ListCodeOfCourses":"Array"
     },
     {
       "card": "1990-17-4654",
