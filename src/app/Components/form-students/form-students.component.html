@@ -1,0 +1,31 @@
+<ion-grid>
+  <form [formGroup]="studentsForm" (ngSubmit)="send(studentsForm.value)">
+    <ion-item>
+      <ion-label position="floating">Carnet:</ion-label>
+      <ion-input ngDefaultControl formControlName="card"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Nombre:</ion-label>
+      <ion-input ngDefaultControl formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Sección:</ion-label>
+      <ion-select placeholder="Selecciona Uno" ok-text="Seleccionar" cancel-text="Cancelar" (ionChange)="changeSelect($event)" ngDefaultControl formControlName="section">
+        <ion-select-option *ngFor="let section of sections" value="{{section.section}}">{{section.section}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Listado de Cursos:</ion-label>
+      <ion-select multiple="true"  placeholder="Selecciona Uno" ok-text="Seleccionar" cancel-text="Cancelar" (ionChange)="changeSelectCourses($event)" ngDefaultControl formControlName="listCodeOfCourses">
+        <ion-select-option *ngFor="let course of courses" value="{{course.code_course}}">{{course.code_course}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-row style="height: 20px;">&nbsp;</ion-row>
+    <ion-button type="submit" color="success" expand="block">Enviar</ion-button>
+    <ion-button (click)="clearForm()" color="danger" expand="block">Cancelar</ion-button>
+  </form>
+</ion-grid>

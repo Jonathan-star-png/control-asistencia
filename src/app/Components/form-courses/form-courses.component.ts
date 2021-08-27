@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder,FormGroup } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { Courses } from 'src/app/Models/courses';
 import { ApiService } from 'src/app/Services/api.service';
 @Component({
@@ -9,7 +10,7 @@ import { ApiService } from 'src/app/Services/api.service';
 })
 export class FormCoursesComponent implements OnInit {
   courseForm:FormGroup;
-  constructor(private _builder:FormBuilder,private api:ApiService) {
+  constructor(private _builder:FormBuilder,private api:ApiService,public toastController: ToastController) {
     this.courseForm=this._builder.group({
       name_course:[''],
       code_course:[''],
@@ -26,10 +27,9 @@ export class FormCoursesComponent implements OnInit {
   }
   
   send(form:Courses){
-    console.log(form);
     this.api.createCourses(form,form.code_course).subscribe(data =>{
-      console.log(data)
       this.api.table.emit("change");
+      this.presentToastSuccess('Curso registrado con éxito', 'success');
     })
     this.clearForm();
     this.getCourses();
@@ -68,5 +68,13 @@ export class FormCoursesComponent implements OnInit {
         this.courses.push(data[i]);
       }
     })
+  }
+  async presentToastSuccess(message,color){
+    const toast = await this.toastController.create({
+      message:message,
+      duration: 2000,
+      color: color,
+    });
+    toast.present();
   }
 }

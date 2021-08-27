@@ -5,6 +5,7 @@ import { FormAttendanceComponent } from './form-attendance/form-attendance.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewCoursesComponent } from './view-courses/view-courses.component';
+import { FormStudentsComponent } from './form-students/form-students.component';
 
 
 
@@ -12,7 +13,8 @@ import { ViewCoursesComponent } from './view-courses/view-courses.component';
   declarations: [
     FormCoursesComponent,
     FormAttendanceComponent,
-    ViewCoursesComponent
+    ViewCoursesComponent,
+    FormStudentsComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { ViewCoursesComponent } from './view-courses/view-courses.component';
   exports:[
     FormCoursesComponent,
     FormAttendanceComponent,
-    ViewCoursesComponent
+    ViewCoursesComponent,
+    FormStudentsComponent
   ]
 })
 export class ComponentsModule { }

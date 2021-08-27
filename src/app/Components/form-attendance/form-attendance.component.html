@@ -10,12 +10,20 @@
         <ion-label position="floating" class="weight">Nombre:</ion-label>
       <ion-input value="{{name}}" disabled="true" class="weight"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label position="floating" class="weight">Sección:</ion-label>
+      <ion-input value="{{section}}" disabled="true" class="weight"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label>Código del Curso:</ion-label>
+        <ion-select placeholder="Selecciona Uno" ok-text="Seleccionar" cancel-text="Cancelar" (ionChange)="changeSelect($event)" ngDefaultControl formControlName="course_code">
+          <ion-select-option *ngFor="let code_course of code_courses" value="{{code_course}}">{{code_course}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    
     </ng-container>
     
-    <ion-item>
-      <ion-label position="floating">Código del Curso:</ion-label>
-      <ion-input ngDefaultControl formControlName="course_code"></ion-input>
-    </ion-item>
     
     <ion-item>
       <ion-label position="floating">Fecha:</ion-label>
@@ -36,7 +44,7 @@
       <ion-input ngDefaultControl formControlName="justification"></ion-input>
     </ion-item>
 
-    <ion-button type="submit" color="success" expand="block">Enviar</ion-button>
+    <ion-button type="submit" color="success" expand="block" disabled="{{disabled}}">Enviar</ion-button>
     <ion-button (click)="clearForm()" color="danger" expand="block">Cancelar</ion-button>
   </form>
 </ion-grid>

@@ -1,7 +1,9 @@
 import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ToastController } from '@ionic/angular';
 import { Attendance } from 'src/app/Models/attendance';
+import { ApiService } from 'src/app/Services/api.service';
 
 @Component({
   selector: 'app-form-attendance',
@@ -9,34 +11,19 @@ import { Attendance } from 'src/app/Models/attendance';
   styleUrls: ['./form-attendance.component.scss'],
 })
 export class FormAttendanceComponent implements OnInit {
-  
-  data=[
-    {
-      "card": "1990-18-16610",
-      "name": "Jonathan Eduardo Sequén Patzán",
-      "section":"A",
-      "ListCodeOfCourses":"Array"
-    },
-    {
-      "card": "1990-17-4654",
-      "name": "José Alberto Hernández Elel"
-    },
-    {
-      "card": "1990-18-17008",
-      "name": "Juan Antonio Matzul Xiá"
-    },
-    {
-      "card": "1990-18-7181",
-      "name": "José Ernesto Izquierdo Miguel"
-    }
-  ];
   status=false;
   name="";
+  section="";
   nombre=new FormControl;
-  attendanceForm:FormGroup
-  constructor(private _builder: FormBuilder) { 
+  attendanceForm:FormGroup;
+  students=[];
+  code_courses=[];
+  disabled:boolean;
+  constructor(private _builder: FormBuilder,private api:ApiService,public toastController: ToastController) { 
     this.attendanceForm=this._builder.group({
       license:[''],
+      name:[''],
+      section:[''],
       course_code:[''],
       date:[''],
       watched_topics:[''],
@@ -44,9 +31,13 @@ export class FormAttendanceComponent implements OnInit {
     })
     
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.getStudents();
+  }
   send(form:Attendance){
-    console.log(form);
+    this.api.createAttendance(form).subscribe(data=>{
+      this.presentToastSuccess('Asistencia registrada con éxito', 'success');
+    })
     this.clearForm();
   }
   changeDate(event){
@@ -57,11 +48,38 @@ export class FormAttendanceComponent implements OnInit {
     this.attendanceForm.reset();
   }
   compareCard(){
-    for(let i in this.data){
-      if(this.attendanceForm.get('license').value==this.data[i].card){
-        this.name=this.data[i].name;
+    for(let i in this.students){
+      if(this.attendanceForm.get('license').value==this.students[i].card){
+        this.name=this.students[i].name;
+        this.section=this.students[i].section;
+        this.code_courses=this.students[i].listCodeOfCourses;
+        this.attendanceForm.get('name').setValue(this.name);
+        this.attendanceForm.get('section').setValue(this.section);
+        this.disabled=false;
         return true
       }
+      else{
+        this.disabled=true;
+      }
     }
+  }
+  getStudents(){
+    this.api.getStudents().subscribe(data=>{
+      for(let i in data){
+        this.students.push(data[i]);
+      }
+    })
+  }
+  changeSelect(event){
+    var select=event.detail.value
+    this.attendanceForm.get('course_code').setValue(select);
+  }
+  async presentToastSuccess(message,color){
+    const toast = await this.toastController.create({
+      message:message,
+      duration: 2000,
+      color: color,
+    });
+    toast.present();
   }
 }
