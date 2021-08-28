@@ -21,6 +21,7 @@ export class ApiService {
   get_student='students/'
   get_students='students.json'
   create_attendance='attendance.json'
+  get_assistance_by_code_course='attendance.json?orderBy="course_code"&equalTo='
   
   /* --------Actualizar tabla-------- */
   table=new EventEmitter<any>()
@@ -71,5 +72,13 @@ export class ApiService {
   createAttendance(form:Attendance): Observable<any>{
     let direccion=this.url_base+this.create_attendance;
     return this.http.post<any>(direccion,form)
+  }
+
+  getAttendanceBycodeCourse(param:any): Observable<any>{
+    let section="\""+param+"\"";
+    console.log(this.url_base+this.get_assistance_by_code_course+section)
+    return this.http.get(this.url_base+this.get_assistance_by_code_course+section,{
+      headers: this.headers
+    })
   }
 }

@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ViewCoursesComponent } from './view-courses/view-courses.component';
 import { FormStudentsComponent } from './form-students/form-students.component';
+import { GraphComponent } from './graph/graph.component';
+import { ChartsModule } from 'ng2-charts';
 
 
 
@@ -14,19 +16,22 @@ import { FormStudentsComponent } from './form-students/form-students.component';
     FormCoursesComponent,
     FormAttendanceComponent,
     ViewCoursesComponent,
-    FormStudentsComponent
+    FormStudentsComponent,
+    GraphComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   exports:[
     FormCoursesComponent,
     FormAttendanceComponent,
     ViewCoursesComponent,
-    FormStudentsComponent
+    FormStudentsComponent,
+    GraphComponent
   ]
 })
 export class ComponentsModule { }

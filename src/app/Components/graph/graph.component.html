@@ -1,0 +1,22 @@
+<ion-item>
+  <ion-label>Listado de Cursos:</ion-label>
+  <ion-select placeholder="Selecciona Uno" ok-text="Seleccionar" cancel-text="Cancelar" (ionChange)="changeSelectCourses($event)">
+    <ion-select-option *ngFor="let course of courses" value="{{course}}">{{course}}</ion-select-option>
+  </ion-select>
+</ion-item>
+
+<div>
+  <div>
+    <div class="chart">
+      <canvas baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+  </div>
+</div>
